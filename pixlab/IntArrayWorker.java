@@ -11,6 +11,20 @@ public class IntArrayWorker
     matrix = theMatrix;
   }
   
+  public int getCount(int n)
+  {
+    int count =0;
+    for (int[] row: matrix)
+    {
+        for (int pixel: row)
+        {
+            if (pixel==n)
+                count++;
+        }
+    }
+    return count;
+  }
+    
   /**
    * Method to return the total 
    * @return the total of the values in the array
@@ -43,6 +57,18 @@ public class IntArrayWorker
       }
     }
     return total;
+  }
+  
+  public int getLargest()
+  {
+      int largest = matrix[0][0];
+      for (int[] row : matrix)
+        for (int pixel: row)
+        {
+            if (largest<pixel)
+                largest=pixel;
+        }
+      return largest;
   }
   
   /**
