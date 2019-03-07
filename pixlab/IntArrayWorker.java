@@ -71,6 +71,16 @@ public class IntArrayWorker
       return largest;
   }
   
+  public int getColTotal(int col)
+  {
+      int total = 0;
+      for (int[] row: matrix)
+      {
+          total+=row[col];
+      }
+      return total;
+  }
+  
   /**
    * Method to fill with an increasing count
    */
