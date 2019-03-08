@@ -96,7 +96,75 @@ public class Picture extends SimplePicture
         pixelObj.setBlue(0);
       }
     }
+  } //END zeroBlue()
+  
+  public void zeroRed()
+  {
+    Pixel[][] image = this.getPixels2D();
+    for (Pixel[] row: image)
+    {
+      for (Pixel p: row)
+      {
+          int red = p.getRed();
+          p.setRed(0);
+      }
+    }
+  }//END zeroRed
+  
+  public void zeroGreen()
+  {
+      Pixel[][] image = this.getPixels2D();
+      for (Pixel[] row: image)
+      {
+        for (Pixel p: row)
+        {
+            int green = p.getGreen();
+            p.setGreen(0);
+        }
+      }
+  }//END zeroGreen
+  
+  public void keepOnlyBlue()
+  {
+      zeroRed();
+      zeroGreen();
+  }//End keepOnlyBlue
+  
+  public void negate()
+  {
+      Pixel[][] image = this.getPixels2D();
+      for (Pixel[] row: image)
+        for (Pixel p: row)
+        {
+            p.setRed(255-p.getRed());
+            p.setGreen(255-p.getGreen());
+            p.setBlue(255-p.getBlue());
+        }
   }
+  
+  public void grayscale()
+  {
+      Pixel[][] image = this.getPixels2D();
+      for (Pixel[] row: image)
+        for (Pixel p: row)
+        {
+            int avg = (p.getRed()+p.getGreen()+p.getBlue())/3;
+            p.setRed(avg);
+            p.setGreen(avg);
+            p.setBlue(avg);
+        }
+  }//End grayscale
+  
+  public void fixUnderwater()
+  {
+      Pixel[][] image = this.getPixels2D();
+      for (int i=20; i<190; i++)
+        for (int j =150; j<450; j++)
+        {
+            if(image[i][j].getRed()<30)
+                image[i][j].setRed(image[i][j].getRed()+200);
+        }
+    }
   
   /** Method that mirrors the picture around a 
     * vertical mirror in the center of the picture
