@@ -237,6 +237,24 @@ public class Picture extends SimplePicture
     } 
   }
   
+  public void mirrorDiagonal()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    Pixel botleftPixel = null;
+    Pixel toprightPixel = null;
+    int width = pixels[0].length;
+    int end = Math.min(pixels[0].length,pixels.length);
+    for (int row = 0; row < end; row++)
+    {
+      for (int col = 0; col <= row; col++)
+      {
+        botleftPixel = pixels[row][col];
+        toprightPixel = pixels[col][row];
+        toprightPixel.setColor(botleftPixel.getColor());
+      }
+    } 
+  }
+  
   /** Mirror just part of a picture of a temple */
   public void mirrorTemple()
   {
@@ -257,6 +275,52 @@ public class Picture extends SimplePicture
         rightPixel = pixels[row]                       
                          [mirrorPoint - col + mirrorPoint];
         rightPixel.setColor(leftPixel.getColor());
+      }
+    }
+  }
+  
+  public void mirrorGull()
+  {
+    int mirrorPoint = 342;
+    Pixel leftPixel = null;
+    Pixel rightPixel = null;
+    int count = 0;
+    Pixel[][] pixels = this.getPixels2D();
+    
+    // loop through the rows
+    for (int row = 234; row < 321; row++)
+    {
+      // loop from 13 to just before the mirror point
+      for (int col = 239; col < mirrorPoint; col++)
+      {
+        
+        leftPixel = pixels[row][col];      
+        rightPixel = pixels[row]                       
+                         [mirrorPoint - col + mirrorPoint];
+        rightPixel.setColor(leftPixel.getColor());
+      }
+    }
+  }
+  
+  public void mirrorArm()
+  {
+    int mirrorPoint = 195;
+    Pixel topPixel = null;
+    Pixel botPixel = null;
+    int count = 0;
+    Pixel[][] pixels = this.getPixels2D();
+    
+    // loop through the rows
+    for (int row = 158; row < mirrorPoint; row++)
+    {
+      // loop from 13 to just before the mirror point
+      for (int col = 105; col < 294; col++)
+      {
+        
+        topPixel = pixels[row][col];      
+        botPixel = pixels[mirrorPoint+mirrorPoint-row]                       
+                         [col];
+        botPixel.setColor(topPixel.getColor());
       }
     }
   }
